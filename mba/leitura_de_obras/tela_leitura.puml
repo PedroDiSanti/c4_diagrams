@@ -1,0 +1,23 @@
+@startuml
+    participant Usuário as "Usuário"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+    participant DB as "Banco de Dados"
+
+    Usuário->>Frontend: Preenche formulário de login
+    Frontend->>Backend: Requisição de login com token
+    alt Token ausente
+        Backend-->>Frontend: Erro 401 (Token ausente)
+    else Token inválido ou sem permissão
+        Backend-->>Frontend: Erro 403 (Sem permissão)
+    else Token válido
+        Backend-->>Frontend: Sucesso 200 com JWT
+    end
+    Frontend-->>Usuário: Direciona usuário para a página apropriada
+    Usuário-->>Frontend: Clica em texto que quer ler
+    Frontend-->>Backend: Requsição de recuperação de texto
+    Backend-->>DB: Busca texto por id
+    DB-->>Backend: Retornar informações do texto
+    Backend-->>Frontend: Sucesso 200 com texto
+    Frontend-->>Usuário: Exibe texto escolhido pelo usuário
+@enduml

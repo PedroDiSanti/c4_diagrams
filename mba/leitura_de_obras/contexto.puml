@@ -1,0 +1,11 @@
+@startuml
+actor Autor
+actor Usuário
+
+package "Feature: Leitura de Obras" {
+  [Interface de leitura] as Interface
+  Autor --> Interface : "Ler obra"
+  Usuário --> Interface : "Ler obra"
+  Interface --> [Ler obra] : "Ler texto de uma obra"
+}
+@enduml
