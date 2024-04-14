@@ -1,0 +1,17 @@
+@startuml
+
+actor Usuário
+
+package "Cadastro e Login" {
+  [Formulário de Cadastro]
+  [Sistema de Login]
+
+  Usuário -down-> [Formulário de Cadastro] : "Preenche e submete"
+  [Formulário de Cadastro] --> [Criação de Perfil] : "Cria perfil"
+  [Formulário de Cadastro] --> [Edição de Perfil] : "Edita perfil"
+  Usuário -down-> [Sistema de Login] : "Utiliza"
+  [Sistema de Login] --> [Login no Site] : "Faz login"
+  [Sistema de Login] --> [Recupera de Senha] : "Recupera senha"
+}
+
+@enduml

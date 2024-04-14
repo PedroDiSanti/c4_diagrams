@@ -1,0 +1,16 @@
+@startuml
+    participant Usuário as "Usuário"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+
+    Usuário->>Frontend: Preenche formulário de login
+    Frontend->>Backend: Requisição de login com token
+    alt Token ausente
+        Backend-->>Frontend: Erro 401 (Token ausente)
+    else Token inválido ou sem permissão
+        Backend-->>Frontend: Erro 403 (Sem permissão)
+    else Token válido
+        Backend-->>Frontend: Sucesso 200 com JWT
+    end
+    Frontend-->>Usuário: Direciona usuário para a página apropriada
+@enduml

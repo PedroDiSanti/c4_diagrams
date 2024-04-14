@@ -1,0 +1,11 @@
+@startuml
+    participant Usuário as "Usuário"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+    participant Email as "Email"
+
+    Usuário->>Frontend: Envia pedido para recuperação de senha
+    Frontend->>Backend: Requisição para recuperação de senha do usuário
+    Backend->>Email: Envia link para recuperação de senha
+    Email-->>Usuário: Direciona o link para recuperação de senha
+@enduml

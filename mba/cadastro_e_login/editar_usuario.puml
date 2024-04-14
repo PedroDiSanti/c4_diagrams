@@ -1,0 +1,24 @@
+@startuml
+    participant Usuário as "Usuário"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+    participant DB as "Banco de Dados"
+
+    Usuário->>Frontend: Preenche formulário para edição de perfil
+    Frontend->>Backend: Requisição para edição de usuário
+    alt Dados incorretos
+        Backend-->>Frontend: Erro 422 (Dados incorretos)
+    else Dados desconhecidos ou mal formatados
+        Backend-->>Frontend: Erro 400 (Payload mal formatado)
+    else Dados válidos
+        Backend->>DB: Tentativa de edição do documento
+        alt Edição bem-sucedida
+            DB-->>Backend: Sucesso na edição
+            Backend-->>Frontend: Mensagem 200 (Sucesso)
+        else Falha na edição
+            DB-->>Backend: Falha na edição
+            Backend-->>Frontend: Erro na edição (erro específico)
+        end
+    end
+    Frontend-->>Usuário: Mostra mensagem baseada na resposta do Backend
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+    participant Usuário as "Usuário não registrado"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+    participant DB as "Banco de Dados"
+
+    Usuário->>Frontend: Preenche formulário com dados pessoais
+    Frontend->>Backend: Envia requisição de cadastro
+    alt Dados inválidos
+        Backend-->>Frontend: Erro 422 (Dados inválidos)
+    else Payload mal formatado
+        Backend-->>Frontend: Erro 400 (Payload mal formatado)
+    else Dados corretos
+        Backend->>DB: Solicita criação de novo usuário
+        alt Usuário já existe
+            DB-->>Backend: Cursor com Usuário existente
+            Backend-->>Frontend: Erro 409 (Usuário já criado)
+        end
+        DB-->>Backend: Cursor com Usuário criado
+        Backend-->> Frontend: Sucesso 201 (Usuário criado)
+    end
+    Frontend-->>Usuário: Mostra mensagem baseada na resposta do Backend
+@enduml

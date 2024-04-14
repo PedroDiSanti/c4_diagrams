@@ -1,0 +1,15 @@
+@startuml
+    participant Usuário as "Usuário"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+    participant Email as "Email"
+    participant DB as "Banco de Dados"
+
+    Usuário->>Email: Clica no link para recuperação de senha
+    Email->>Frontend: Redireciona para a página de criação de uma nova senha
+    Usuário->>Frontend: Envia nova senha
+    Frontend->>Backend: Requisição para edição de usuário
+    Backend-->>DB: Atualiza senha do usuário
+    Backend-->>Frontend: Mensagem 200 (Sucesso)
+    Frontend-->>Usuário: Mostra mensagem baseada na resposta do Backend
+@enduml
