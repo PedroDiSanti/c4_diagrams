@@ -1,0 +1,13 @@
+@startuml
+
+actor Usuário
+
+package "Sistema de Feedbacks" {
+  [Interface de Comentários]
+  [Interface de Avaliação]
+
+  Usuário --> [Interface de Comentários] : "Cria e edita comentários sobre obras"
+  Usuário -> [Interface de Avaliação] : "Avalia obras"
+}
+
+@enduml

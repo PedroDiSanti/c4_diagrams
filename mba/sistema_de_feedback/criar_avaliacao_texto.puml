@@ -1,0 +1,19 @@
+@startuml
+    participant Usuario as "Usuário Registrado e Logado"
+    participant Frontend
+    participant Backend
+    participant DB as "Banco de Dados"
+
+    Usuario->>Frontend: Clica em avaliar (positivo ou negativo)
+    Frontend->>Backend: Envia avaliação (positiva/negativa)
+    Backend->>DB: Solicita atualização da avaliação
+    alt Avaliação Positiva
+        DB-->>Backend: Incrementa total de avaliações
+    else Avaliação Negativa
+        DB-->>Backend: Decrementa total de avaliações
+    end
+    Backend-->>DB: Salva avaliação do usuário
+    DB-->>Backend: Confirmação de salvamento
+    Backend-->>Frontend: Resposta do banco (sucesso/falha)
+    Frontend-->>Usuario: Mostra mensagem de sucesso ou erro
+@enduml

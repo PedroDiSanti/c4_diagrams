@@ -1,0 +1,21 @@
+@startuml
+    participant Usuario as "Usuário Registrado e Logado"
+    participant Frontend
+    participant Backend
+    participant DB as "Banco de Dados"
+
+    Usuario->>Frontend: Escreve texto do comentário
+    alt Criar Comentário
+        Frontend->>Backend: Envia novo comentário
+    else Editar Comentário
+        Frontend->>Backend: Envia comentário editado
+    end
+    Backend->>DB: Solicita salvamento do comentário
+    alt Comentário novo
+        DB-->>Backend: Comentário criado (sucesso)
+    else Comentário editado
+        DB-->>Backend: Comentário atualizado (sucesso)
+    end
+    Backend-->>Frontend: Resposta do banco (sucesso)
+    Frontend-->>Usuario: Mostra mensagem de sucesso
+@enduml
