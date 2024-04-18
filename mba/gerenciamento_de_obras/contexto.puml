@@ -1,0 +1,20 @@
+@startuml
+
+actor Author
+actor User
+
+package "Feature: Gerenciamento de Obras" {
+  [Formulário de Cadastro] as Form
+  [Interface de Gerenciamento] as Interface
+  [Listagem de Obras] as Listagem
+
+  Author --> Form : "Cria e submete"
+  Form --> [Cadastrar Obra]: "Cadastrar novas obras no site."
+  Author --> Interface : "Gerenciar obras"
+  Interface --> [Atualizar Obra] : "Atualiza informações da obra"
+  Interface --> [Deletar Obra] : "Remove obra"
+  Author --> Listagem : "Visualiza"
+  User --> Listagem : "Visualiza"
+}
+
+@enduml

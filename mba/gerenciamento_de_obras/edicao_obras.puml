@@ -1,0 +1,17 @@
+@startuml
+    participant Usuario as "Usuário Logado"
+    participant Frontend
+    participant Backend
+    participant DB as "Banco de Dados"
+
+    Usuario->>Frontend: Preenche formulário com atualizações da obra
+    Frontend->>Backend: Envia dados atualizados da obra
+    Backend->>DB: Processa e atualiza dados
+    alt Dados válidos
+        DB-->>Backend: Dados atualizados
+        Backend-->>Frontend: HTTP 200 OK
+    else Dados inválidos
+        Backend-->>Frontend: HTTP 400 Bad Request
+    end
+    Frontend-->>Usuario: Mostra mensagem de status
+@enduml

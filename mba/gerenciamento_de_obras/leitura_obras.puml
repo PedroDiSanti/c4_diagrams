@@ -1,0 +1,18 @@
+@startuml
+    participant Usuario as "Usuário Logado"
+    participant Frontend
+    participant Backend
+    participant DB as "Banco de Dados"
+
+    Usuario->>Frontend: Procura por obra via ID
+    Frontend->>Backend: Envia requisição com ID da obra
+    Backend->>DB: Busca dados da obra
+    alt Obra encontrada
+        DB-->>Backend: Retorna dados da obra
+        Backend-->>Frontend: HTTP 200 OK com dados da obra
+    else Obra não encontrada
+        Backend-->>Frontend: HTTP 404 NOT FOUND
+    end
+    Frontend-->>Usuario: Exibe resultado da busca
+
+@enduml
